@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>txshield - check a transaction</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body data-page="check">
+  <header id="top" class="top"></header>
+  <main>
+    <h1>Check a transaction</h1>
+    <p class="muted">Paste a simulated transaction or typed-data JSON. Nothing is signed or sent; it all stays on this machine.</p>
+    <div class="grid">
+      <section class="card" aria-labelledby="in-h">
+        <h2 id="in-h">Input</h2>
+        <label for="sample">Load a sample</label>
+        <select id="sample"><option value="">Choose a fixture...</option></select>
+        <label for="tx">Transaction JSON</label>
+        <textarea id="tx" rows="18" maxlength="20000" spellcheck="false" placeholder='{"tx": {"to": "0x...", "call": {"fn": "approve", "args": ["0x...", "MAX"]}}}'></textarea>
+        <div class="row">
+          <button id="go" class="primary" type="button">Check it</button>
+          <span id="msg" class="err" role="alert"></span>
+        </div>
+      </section>
+      <section id="out" class="card" aria-live="polite">
+        <h2>Verdict</h2>
+        <p class="muted">Nothing checked yet.</p>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

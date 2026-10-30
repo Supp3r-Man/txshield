@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>txshield - sign in</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body data-page="login">
+  <main class="login card">
+    <h1>🧯 txshield</h1>
+    <p class="muted">Local-only toy. Make an account (it never leaves this machine) or log in.</p>
+    <form id="login-form">
+      <label for="user">Username</label>
+      <input id="user" autocomplete="username" required minlength="3" maxlength="32">
+      <label for="pass">Password (10+ characters)</label>
+      <input id="pass" type="password" autocomplete="current-password" required minlength="10" maxlength="128">
+      <div class="row">
+        <button class="primary" type="submit">Log in</button>
+        <button class="ghost" type="button" id="register">Create account</button>
+      </div>
+      <p id="msg" class="err" role="alert"></p>
+    </form>
+  </main>
+</body>
+</html>

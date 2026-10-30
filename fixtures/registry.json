@@ -1,0 +1,40 @@
+{
+  "aliases": {
+    "alice": "0xa11ce00011112222333344445555666677770001",
+    "bob": "0xb0b5d3a17c9e42f81a6b0c5de7f39a248b61c0de",
+    "bob_fake": "0xb0b511aa22bb33cc44dd55ee66ff77008899c0de",
+    "carol": "0xca010a0a0b0b0c0c0d0d0e0e0f0f1a1a2b2bca02",
+    "router": "0x5100a000111122223333444455556666777700a1",
+    "market": "0x5100b000111122223333444455556666777700b1",
+    "permit2": "0x5100c000111122223333444455556666777700c1",
+    "unverified_spender": "0x0dd0ba11deadbeef123456789abcdef00000bad1",
+    "new_contract": "0xfeed00001111000022220000333300000000ab12",
+    "drainer": "0xd4a10000badc0de0112233445566778899aabbcc",
+    "phisher": "0x9a1f00005eed5eed13371337cafebabe0000f00d",
+    "tUSDC": "0x7e570001aaaa1111bbbb2222cccc3333dddd0001",
+    "tDAI": "0x7e570002aaaa1111bbbb2222cccc3333dddd0002",
+    "tWETH": "0x7e570003aaaa1111bbbb2222cccc3333dddd0003",
+    "tAPE": "0x7e570004aaaa1111bbbb2222cccc3333dddd0004"
+  },
+  "native": {"symbol": "tETH", "decimals": 18, "usd": 2000},
+  "tokens": {
+    "@tUSDC": {"symbol": "tUSDC", "decimals": 6, "usd": 1, "type": "erc20"},
+    "@tDAI": {"symbol": "tDAI", "decimals": 18, "usd": 1, "type": "erc20"},
+    "@tWETH": {"symbol": "tWETH", "decimals": 18, "usd": 2000, "type": "erc20"},
+    "@tAPE": {"symbol": "tAPE", "decimals": 0, "usd": 800, "type": "erc721"}
+  },
+  "contracts": {
+    "@router": {"name": "SimSwapRouter", "verified": true, "age_days": 900},
+    "@market": {"name": "SimMarket", "verified": true, "age_days": 600},
+    "@permit2": {"name": "SimPermit2", "verified": true, "age_days": 1000},
+    "@new_contract": {"name": "(unnamed)", "verified": false, "age_days": 2}
+  },
+  "origins": {
+    "sim-swap.example": {"contracts": ["@router", "@permit2"]},
+    "sim-market.example": {"contracts": ["@market"]}
+  },
+  "denylist": [
+    {"address": "@drainer", "reason": "reported drainer kit (simulated report)"},
+    {"address": "@phisher", "reason": "linked to a fake airdrop site (simulated report)"}
+  ]
+}

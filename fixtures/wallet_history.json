@@ -1,0 +1,22 @@
+{
+  "wallet": "@alice",
+  "now": 1800000000,
+  "balances": {"native": "5 tETH", "@tUSDC": "12000 tUSDC", "@tDAI": "3000 tDAI", "@tWETH": "2 tWETH", "@tAPE": "3 tAPE"},
+  "allowances": {"@tUSDC": {"@router": "1000 tUSDC"}},
+  "operators": {"@tAPE": {"@market": true}},
+  "contacts": [
+    {"name": "Bob", "address": "@bob"},
+    {"name": "Carol", "address": "@carol"}
+  ],
+  "history": [
+    {"ts": 1796544000, "dir": "out", "type": "transfer", "asset": "native", "usd": 150, "counterparty": "@bob"},
+    {"ts": 1797408000, "dir": "out", "type": "transfer", "asset": "@tUSDC", "usd": 60, "counterparty": "@carol"},
+    {"ts": 1798185600, "dir": "out", "type": "transfer", "asset": "@tUSDC", "usd": 500, "counterparty": "@bob"},
+    {"ts": 1798790400, "dir": "out", "type": "swap", "asset": "@tUSDC", "usd": 300, "counterparty": "@router"},
+    {"ts": 1799222400, "dir": "out", "type": "transfer", "asset": "native", "usd": 45, "counterparty": "@carol"},
+    {"ts": 1799568000, "dir": "out", "type": "transfer", "asset": "@tUSDC", "usd": 220, "counterparty": "@bob"},
+    {"ts": 1799989200, "dir": "out", "type": "transfer", "asset": "@tUSDC", "usd": 300, "counterparty": "@bob"},
+    {"ts": 1799827200, "dir": "in", "type": "transfer", "asset": "@tUSDC", "usd": 200, "counterparty": "@carol"},
+    {"ts": 1799900000, "dir": "in", "type": "transfer", "asset": "@tUSDC", "usd": 0, "counterparty": "@bob_fake"}
+  ]
+}

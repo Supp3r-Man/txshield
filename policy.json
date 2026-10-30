@@ -1,0 +1,16 @@
+{
+  "default_action": "warn",
+  "escalate_warns_at": 3,
+  "rules": {
+    "unlimited_approval": {"action": "warn", "params": {}},
+    "unverified_contract": {"action": "warn", "params": {"min_age_days": 30}},
+    "permit_long_deadline": {"action": "warn", "params": {"max_days": 30}},
+    "spender_mismatch": {"action": "warn", "params": {}},
+    "address_poisoning": {"action": "block", "params": {"prefix": 4, "suffix": 4}},
+    "blind_signing": {"action": "warn", "params": {}},
+    "denylist": {"action": "block", "params": {}},
+    "large_value": {"action": "warn", "params": {"multiple": 3, "min_usd": 1000}},
+    "spending_limit": {"action": "block", "params": {"per_tx_usd": 2500, "daily_usd": 4000}}
+  },
+  "overrides": []
+}
