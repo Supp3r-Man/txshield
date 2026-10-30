@@ -1,0 +1,130 @@
+{
+  "txs": [
+    {"id": "tx01", "label": "benign", "category": "transfer", "title": "Pay Bob 100 tUSDC (saved contact)",
+     "why": "Known recipient, small amount.",
+     "tx": {"from": "@alice", "to": "@tUSDC", "call": {"fn": "transfer", "args": ["@bob", "100 tUSDC"]}}},
+
+    {"id": "tx02", "label": "benign", "category": "transfer", "title": "Send Carol 0.25 tETH",
+     "why": "Known recipient, about $500.",
+     "tx": {"from": "@alice", "to": "@carol", "value": "0.25 tETH"}},
+
+    {"id": "tx03", "label": "benign", "category": "approval", "title": "Approve exactly 500 tUSDC for the swap router",
+     "why": "Exact amount, verified old contract, matches the site.", "origin": "sim-swap.example",
+     "tx": {"from": "@alice", "to": "@tUSDC", "call": {"fn": "approve", "args": ["@router", "500 tUSDC"]}}},
+
+    {"id": "tx04", "label": "benign", "category": "swap", "title": "Swap 200 tUSDC for at least 195 tDAI",
+     "why": "Verified router, output comes back to you.", "origin": "sim-swap.example",
+     "tx": {"from": "@alice", "to": "@router", "call": {"fn": "swapExactTokensForTokens",
+            "args": ["200 tUSDC", "195 tDAI", ["@tUSDC", "@tDAI"], "@alice", 1800001800]}}},
+
+    {"id": "tx05", "label": "benign", "category": "approval", "title": "Revoke SimMarket's access to your tAPE NFTs",
+     "why": "Revocations are good hygiene and should be quiet.", "origin": "sim-market.example",
+     "tx": {"from": "@alice", "to": "@tAPE", "call": {"fn": "setApprovalForAll", "args": ["@market", false]}}},
+
+    {"id": "tx06", "label": "benign", "category": "transfer", "title": "Gift NFT #7 to Carol",
+     "why": "One NFT (about $800) to a known contact.",
+     "tx": {"from": "@alice", "to": "@tAPE", "call": {"fn": "safeTransferFrom", "args": ["@alice", "@carol", 7]}}},
+
+    {"id": "tx07", "label": "benign", "category": "permit", "title": "Permit: 300 tUSDC for the router, 30 minutes",
+     "why": "Small amount, short deadline, spender matches the site.", "origin": "sim-swap.example",
+     "typed_data": {"domain": {"name": "tUSDC", "version": "1", "chainId": 1337, "verifyingContract": "@tUSDC"},
+                    "primaryType": "Permit",
+                    "message": {"owner": "@alice", "spender": "@router", "value": "300 tUSDC", "nonce": 4, "deadline": 1800001800}}},
+
+    {"id": "tx08", "label": "benign", "category": "permit2", "title": "Permit2: 300 tUSDC for the router, 1 hour",
+     "why": "Bounded amount and expiry, spender matches the site.", "origin": "sim-swap.example",
+     "typed_data": {"domain": {"name": "SimPermit2", "chainId": 1337, "verifyingContract": "@permit2"},
+                    "primaryType": "PermitSingle",
+                    "message": {"details": {"token": "@tUSDC", "amount": "300 tUSDC", "expiration": 1800003600, "nonce": 0},
+                                "spender": "@router", "sigDeadline": 1800001800}}},
+
+    {"id": "tx09", "label": "benign", "category": "multicall", "title": "Approve then swap in one batch",
+     "why": "Both steps are exact and go to a verified router.", "origin": "sim-swap.example",
+     "tx": {"from": "@alice", "to": "@router", "call": {"fn": "multicall", "args": [
+        ["@tUSDC", "@router"], [0, 0],
+        [{"fn": "approve", "args": ["@router", "200 tUSDC"]},
+         {"fn": "swapExactTokensForTokens", "args": ["200 tUSDC", "195 tDAI", ["@tUSDC", "@tDAI"], "@alice", 1800001800]}]]}}},
+
+    {"id": "tx10", "label": "benign", "category": "approval", "title": "Unlimited tUSDC approval to a verified router (convenient, risky)",
+     "why": "Honest false alarm: most dapps ask for this. Fix it with a policy override, not by loosening the rule.",
+     "origin": "sim-swap.example",
+     "tx": {"from": "@alice", "to": "@tUSDC", "call": {"fn": "approve", "args": ["@router", "MAX"]}}},
+
+    {"id": "tx11", "label": "benign", "category": "transfer", "title": "Pay Carol 0.9 tETH (unusually big, but legit)",
+     "why": "Honest false alarm: about $1,800 is well above this wallet's usual outflow.",
+     "tx": {"from": "@alice", "to": "@carol", "value": "0.9 tETH"}},
+
+    {"id": "tx12", "label": "benign", "category": "login", "title": "Sign in to SimMarket",
+     "why": "Known message type, no assets involved.", "origin": "sim-market.example",
+     "typed_data": {"domain": {"name": "SimMarket", "chainId": 1337, "verifyingContract": "@market"},
+                    "primaryType": "SignIn",
+                    "message": {"statement": "Sign in to SimMarket. This request will not trigger a transaction or cost gas.", "nonce": "a81c92"}}},
+
+    {"id": "tx13", "label": "malicious", "category": "approval", "title": "Free-mint site asks for UNLIMITED tUSDC",
+     "why": "Unlimited allowance to an unknown spender.", "origin": "sim-freemint.example",
+     "tx": {"from": "@alice", "to": "@tUSDC", "call": {"fn": "approve", "args": ["@unverified_spender", "MAX"]}}},
+
+    {"id": "tx14", "label": "malicious", "category": "approval", "title": "NFT 'airdrop' wants control of ALL your tAPE",
+     "why": "setApprovalForAll to a two-day-old unverified contract.", "origin": "sim-nftdrop.example",
+     "tx": {"from": "@alice", "to": "@tAPE", "call": {"fn": "setApprovalForAll", "args": ["@new_contract", true]}}},
+
+    {"id": "tx15", "label": "malicious", "category": "permit", "title": "Permit to a denylisted address, unlimited, never expires",
+     "why": "Spender is on the denylist.", "origin": "sim-airdr0p.example",
+     "typed_data": {"domain": {"name": "tUSDC", "version": "1", "chainId": 1337, "verifyingContract": "@tUSDC"},
+                    "primaryType": "Permit",
+                    "message": {"owner": "@alice", "spender": "@phisher", "value": "MAX", "nonce": 4, "deadline": "MAX"}}},
+
+    {"id": "tx16", "label": "malicious", "category": "permit2", "title": "Compromised swap front-end: Permit2 to a stranger",
+     "why": "Known site, but the spender isn't one of its contracts; unlimited and a one-year deadline on top.",
+     "origin": "sim-swap.example",
+     "typed_data": {"domain": {"name": "SimPermit2", "chainId": 1337, "verifyingContract": "@permit2"},
+                    "primaryType": "PermitSingle",
+                    "message": {"details": {"token": "@tUSDC", "amount": "MAX", "expiration": 1831536000, "nonce": 0},
+                                "spender": "@unverified_spender", "sigDeadline": 1831536000}}},
+
+    {"id": "tx17", "label": "malicious", "category": "permit", "title": "Permit with a one-year deadline for an unknown spender",
+     "why": "Finite amount, but long-lived and to a stranger.", "origin": "sim-airdr0p.example",
+     "typed_data": {"domain": {"name": "tUSDC", "version": "1", "chainId": 1337, "verifyingContract": "@tUSDC"},
+                    "primaryType": "Permit",
+                    "message": {"owner": "@alice", "spender": "@unverified_spender", "value": "5000 tUSDC", "nonce": 4, "deadline": 1831536000}}},
+
+    {"id": "tx18", "label": "malicious", "category": "poisoning", "title": "Address poisoning: 500 tUSDC to a lookalike of Bob",
+     "why": "Same first and last four characters as Bob, and it sent dust last week.",
+     "tx": {"from": "@alice", "to": "@tUSDC", "call": {"fn": "transfer", "args": ["@bob_fake", "500 tUSDC"]}}},
+
+    {"id": "tx19", "label": "malicious", "category": "blind", "title": "Opaque call to a contract nobody can read",
+     "why": "Unknown selector sent to an unknown contract.", "origin": "sim-freemint.example",
+     "tx": {"from": "@alice", "to": "@unverified_spender", "data": "0xdeadbeef1122334455667788cafebabe"}},
+
+    {"id": "tx20", "label": "malicious", "category": "blind", "title": "eth_sign request for a raw 32-byte blob",
+     "why": "Raw hash signing: the wallet can't say what it authorizes.", "origin": "sim-freemint.example",
+     "raw_message": "0x9f2c7a41e03b5d681a4c8e92b7d0f3566c19a2e4d8503fb741ce9a027b3d6f85"},
+
+    {"id": "tx21", "label": "malicious", "category": "drainer", "title": "NFT transfer to a known drainer",
+     "why": "Destination is on the denylist.",
+     "tx": {"from": "@alice", "to": "@tAPE", "call": {"fn": "safeTransferFrom", "args": ["@alice", "@drainer", 2]}}},
+
+    {"id": "tx22", "label": "malicious", "category": "drainer", "title": "Send 3 tETH to a stranger",
+     "why": "Over the per-transaction spending limit.",
+     "tx": {"from": "@alice", "to": "@unverified_spender", "value": "3 tETH"}},
+
+    {"id": "tx23", "label": "malicious", "category": "multicall", "title": "Batch hides an unlimited approval behind a small transfer",
+     "why": "Step 1 looks harmless; steps 2 and 3 grant unlimited access and call an unreadable function.",
+     "origin": "sim-freemint.example",
+     "tx": {"from": "@alice", "to": "@router", "call": {"fn": "multicall", "args": [
+        ["@tUSDC", "@tUSDC", "@new_contract"], [0, 0, 0],
+        [{"fn": "transfer", "args": ["@carol", "5 tUSDC"]},
+         {"fn": "approve", "args": ["@new_contract", "MAX"]},
+         "0xdeadbeef1122334455667788"]]}}},
+
+    {"id": "tx24", "label": "malicious", "category": "swap", "title": "Swap whose output goes to someone else",
+     "why": "No rule looks at the swap recipient. The state diff shows you get nothing back, but the verdict stays green. Next step: flag recipient != wallet.",
+     "origin": "sim-swap.example",
+     "tx": {"from": "@alice", "to": "@router", "call": {"fn": "swapExactTokensForTokens",
+            "args": ["200 tUSDC", "195 tDAI", ["@tUSDC", "@tDAI"], "@unverified_spender", 1800001800]}}},
+
+    {"id": "tx25", "label": "malicious", "category": "social", "title": "Pay a fake 'support agent' 40 tUSDC",
+     "why": "Technically a perfectly normal small transfer. No on-chain signal exists; only the human knows it's a scam.",
+     "tx": {"from": "@alice", "to": "@tUSDC", "call": {"fn": "transfer", "args": ["@unverified_spender", "40 tUSDC"]}}}
+  ]
+}

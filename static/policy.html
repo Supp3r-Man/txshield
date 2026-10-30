@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>txshield - policy</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body data-page="policy">
+  <header id="top" class="top"></header>
+  <main>
+    <h1>Policy</h1>
+    <p class="muted">Each rule can allow, warn or block. Red means any block, or enough warnings piling up.</p>
+    <div class="grid">
+      <div>
+        <label for="def">Action for rules not listed</label>
+        <select id="def"></select>
+      </div>
+      <div>
+        <label for="esc">Escalate to block after this many warnings (0 = never)</label>
+        <input id="esc" type="number" min="0" max="20" step="1">
+      </div>
+    </div>
+    <h2 style="margin-top:1.25rem">Rules</h2>
+    <div id="rules" class="rules"></div>
+    <h2 style="margin-top:1.25rem">Overrides</h2>
+    <p class="muted">Trust one address for one rule (leave the address empty to change the whole rule). The last matching override wins.</p>
+    <div id="overrides"></div>
+    <button id="add" class="ghost" type="button">Add override</button>
+    <div class="row">
+      <button id="save" class="primary" type="button">Save policy</button>
+      <button id="reset" class="ghost" type="button">Reset to defaults</button>
+      <span id="msg" role="status"></span>
+    </div>
+  </main>
+</body>
+</html>

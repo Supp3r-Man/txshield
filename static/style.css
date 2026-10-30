@@ -1,0 +1,63 @@
+:root {
+  color-scheme: dark;
+  --bg: #0f1218; --panel: #171c26; --line: #2a3242; --text: #e6e9ef; --muted: #9aa4b5;
+  --accent: #6ea8ff; --ok: #2fbf71; --warn: #f0a020; --block: #ef4444;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+a { color: var(--accent); }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+main { max-width: 1100px; margin: 0 auto; padding: 1rem; }
+h1 { font-size: 1.5rem; margin: .5rem 0; }
+h2 { font-size: 1.1rem; margin: 0 0 .75rem; }
+h3 { font-size: 1rem; margin: 1.25rem 0 .4rem; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+.muted { color: var(--muted); }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.top { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; padding: .6rem 1rem; border-bottom: 1px solid var(--line); background: var(--panel); }
+.top nav { display: flex; gap: 1rem; flex: 1; }
+.top nav a { color: var(--text); text-decoration: none; padding: .2rem .1rem; border-bottom: 2px solid transparent; }
+.top nav a[aria-current="page"] { border-color: var(--accent); }
+.brand { font-weight: 700; color: var(--text); text-decoration: none; }
+.who { display: flex; align-items: center; gap: .6rem; color: var(--muted); }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; align-items: start; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 1rem; min-width: 0; }
+label { display: block; margin: .75rem 0 .25rem; color: var(--muted); font-size: .9rem; }
+input, select, textarea { width: 100%; background: #0b0e14; color: var(--text); border: 1px solid var(--line); border-radius: 6px; padding: .5rem; font: inherit; }
+textarea { font: 13px/1.4 ui-monospace, Consolas, monospace; resize: vertical; }
+button { font: inherit; border-radius: 6px; border: 1px solid var(--line); padding: .5rem .9rem; cursor: pointer; background: #222a3a; color: var(--text); }
+button.primary { background: var(--accent); color: #0b1020; border-color: var(--accent); font-weight: 600; }
+button.ghost { background: transparent; }
+button:hover { filter: brightness(1.15); }
+.row { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem; margin-top: .9rem; }
+.err { color: #ff8a8a; }
+.ok-msg { color: var(--ok); }
+.verdict { display: flex; gap: .9rem; align-items: center; padding: .9rem 1rem; border-radius: 8px; border: 2px solid; }
+.verdict .icon { font-size: 1.8rem; line-height: 1; }
+.verdict strong { font-size: 1.2rem; }
+.verdict .sub { color: var(--text); opacity: .85; font-size: .9rem; }
+.verdict.ok { border-color: var(--ok); background: #12301f; }
+.verdict.warn { border-color: var(--warn); background: #3a2a0a; }
+.verdict.block { border-color: var(--block); background: #3a1414; }
+.lines { padding-left: 1.2rem; margin: 0; }
+.lines li { white-space: pre-wrap; overflow-wrap: anywhere; margin-bottom: .3rem; }
+.scroll { overflow-x: auto; margin: .5rem 0; }
+table { width: 100%; border-collapse: collapse; font-size: .92rem; }
+th, td { text-align: left; padding: .4rem .5rem; border-bottom: 1px solid var(--line); overflow-wrap: anywhere; }
+th { color: var(--muted); font-weight: 600; }
+.note { color: var(--warn); }
+.reasons { list-style: none; padding: 0; margin: 0; }
+.reasons li { padding: .5rem 0; border-bottom: 1px solid var(--line); }
+.msg { color: var(--muted); font-size: .92rem; margin-top: .15rem; overflow-wrap: anywhere; }
+.chip { display: inline-block; font-size: .75rem; font-weight: 700; padding: .05rem .45rem; border-radius: 99px; border: 1px solid; }
+.chip.allow { color: var(--ok); border-color: var(--ok); }
+.chip.warn { color: var(--warn); border-color: var(--warn); }
+.chip.block { color: var(--block); border-color: var(--block); }
+fieldset.rule { border: 1px solid var(--line); border-radius: 8px; margin: 0 0 .75rem; padding: .25rem .9rem .9rem; }
+fieldset.rule legend { padding: 0 .4rem; font-weight: 600; }
+.rules { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: .75rem; }
+.override { display: grid; grid-template-columns: 1.2fr 2fr .8fr auto; gap: .5rem; align-items: end; margin-bottom: .5rem; }
+.login { max-width: 380px; margin: 4rem auto; }
+@media (max-width: 860px) {
+  .grid { grid-template-columns: 1fr; }
+  .override { grid-template-columns: 1fr; }
+}

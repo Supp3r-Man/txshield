@@ -1,0 +1,26 @@
+{
+  "_note": "Hand-written, tiny, simulated. Well-known selectors are the usual ones; multicall is an invented batch call (targets, values, calldata) with an invented selector. Python's stdlib has no keccak, so selectors are listed instead of computed.",
+  "functions": [
+    {"name": "transfer", "selector": "0xa9059cbb", "kind": "erc20_transfer",
+     "inputs": [{"name": "to", "type": "address"}, {"name": "amount", "type": "uint256"}]},
+    {"name": "approve", "selector": "0x095ea7b3", "kind": "approve",
+     "inputs": [{"name": "spender", "type": "address"}, {"name": "amount", "type": "uint256"}]},
+    {"name": "setApprovalForAll", "selector": "0xa22cb465", "kind": "approval_for_all",
+     "inputs": [{"name": "operator", "type": "address"}, {"name": "approved", "type": "bool"}]},
+    {"name": "safeTransferFrom", "selector": "0x42842e0e", "kind": "nft_transfer",
+     "inputs": [{"name": "from", "type": "address"}, {"name": "to", "type": "address"}, {"name": "tokenId", "type": "uint256"}]},
+    {"name": "permit", "selector": "0xd505accf", "kind": "permit",
+     "inputs": [{"name": "owner", "type": "address"}, {"name": "spender", "type": "address"}, {"name": "value", "type": "uint256"},
+                {"name": "deadline", "type": "uint256"}, {"name": "v", "type": "uint8"}, {"name": "r", "type": "bytes32"}, {"name": "s", "type": "bytes32"}]},
+    {"name": "swapExactTokensForTokens", "selector": "0x38ed1739", "kind": "swap",
+     "inputs": [{"name": "amountIn", "type": "uint256"}, {"name": "amountOutMin", "type": "uint256"}, {"name": "path", "type": "address[]"},
+                {"name": "to", "type": "address"}, {"name": "deadline", "type": "uint256"}]},
+    {"name": "multicall", "selector": "0x5a1c0de1", "kind": "multicall",
+     "inputs": [{"name": "targets", "type": "address[]"}, {"name": "values", "type": "uint256[]"}, {"name": "data", "type": "bytes[]"}]}
+  ],
+  "typed_data": {
+    "Permit": {"kind": "permit"},
+    "PermitSingle": {"kind": "permit2_single"},
+    "SignIn": {"kind": "login"}
+  }
+}
